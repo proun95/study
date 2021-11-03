@@ -3,7 +3,7 @@ module Exercise
     class << self
       def get_max(array, max = array[0])
         head, *tail = array
-        if array == []
+        if array.empty?
           return max
         elsif head > max
           max = head
@@ -12,17 +12,9 @@ module Exercise
         get_max(tail, max)
       end
 
-      def replace_with_value(array, value)
-        head, *tail = array
-        head = value if head.positive?
-        return head if tail == []
-
-        [head, *replace_with_value(tail, value)]
-      end
-
       def replace(array)
         max = get_max(array)
-        replace_with_value(array, max)
+        array.map { |el| el > 0 ? max : el }
       end
 
       def search(array, query, base = 0)
