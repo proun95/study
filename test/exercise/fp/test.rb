@@ -1,6 +1,6 @@
 require 'csv'
-require './test/test_helper.rb'
-require_relative './solution.rb'
+require './test/test_helper'
+require_relative './solution'
 
 # Оба задания нужно решить используя map и reduce
 class Exercise::FpTest < Minitest::Test
