@@ -22,8 +22,17 @@ module Exercise
         film_rating[:rating_sum] / film_rating[:films_count]
       end
 
-      def chars_count(_films, _threshold)
-        0
+      def chars_count(films, threshold)
+        films.reduce(0) do |i_common_count, film|
+          if !film['rating_kinopoisk'].nil? && film['rating_kinopoisk'].to_f >= threshold
+            i_common_count += film['name'].split('').reduce(0) do |i_film_count, name_letter|
+              i_film_count += 1 if name_letter == 'и'
+              i_film_count
+            end
+          end
+
+          i_common_count
+        end
       end
     end
   end
