@@ -25,8 +25,17 @@ module Exercise
         replace_with_value(array, max)
       end
 
-      def search(_array, _query)
-        0
+      def search(array, query, base = 0)
+        length = array.length
+        middle = length / 2
+        return base + middle if array[middle] == query
+        return -1 if length <= 1 && array[0] != query
+
+        if array[middle] > query
+          search(array[0..middle - 1], query, base)
+        else
+          search(array[middle..length], query, base + middle)
+        end
       end
     end
   end
