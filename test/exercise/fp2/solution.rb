@@ -16,10 +16,8 @@ module Exercise
 
       # Написать свою функцию my_map
       def my_map(&func)
-        head, *tail = self
-        return func.call(head) if tail.empty?
-
-        MyArray.new([func.call(head), *MyArray.new(tail).my_map(&func)])
+        func_for_reduce = ->(acc, element) { acc << func.call(element) }
+        my_reduce(MyArray.new, &func_for_reduce)
       end
 
       # Написать свою функцию my_compact
@@ -33,10 +31,7 @@ module Exercise
       # Написать свою функцию my_reduce
       def my_reduce(acc = nil, &func)
         head, *tail = self
-        if acc.nil?
-          acc = head
-          head, *tail = tail
-        end
+        return MyArray.new(tail).my_reduce(head, &func) if acc.nil?
         return func.call(acc, head) if tail.empty?
 
         MyArray.new(tail).my_reduce(func.call(acc, head), &func)
