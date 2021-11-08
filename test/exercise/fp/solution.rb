@@ -24,10 +24,7 @@ module Exercise
           acc
         end
 
-        correct_films_names.split('').reduce(0) do |i_film_count, name_letter|
-          i_film_count += 1 if name_letter == 'и'
-          i_film_count
-        end
+        correct_films_names.count('и')
       end
     end
   end
