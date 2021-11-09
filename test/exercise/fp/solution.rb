@@ -19,12 +19,10 @@ module Exercise
       end
 
       def chars_count(films, threshold)
-        correct_films_names = films.inject('') do |acc, film|
-          acc << film['name'] if !film['rating_kinopoisk'].nil? && film['rating_kinopoisk'].to_f >= threshold
-          acc
-        end
+        correct_films = films.select { |film| !film['rating_kinopoisk'].nil? && film['rating_kinopoisk'].to_f >= threshold }
+        correct_films_names = correct_films.map { |film| film['name'] }
 
-        correct_films_names.count('и')
+        correct_films_names.join('').count('и')
       end
     end
   end
